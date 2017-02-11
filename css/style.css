@@ -1,0 +1,22 @@
+.cw-profile {
+	background: #4B4D51;
+	color: #efefef;
+	padding: 15px;
+	border-radius: 10px;
+}
+
+.cw-basic-userdata {
+	text-align: center;
+}
+
+.cw-header, .cw-header a {
+	color: #efefef;
+}
+
+.cw-small-header {
+	font-weight: bold;
+}
+
+.cw-language {
+	font-style: oblique;
+}
