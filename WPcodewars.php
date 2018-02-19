@@ -3,37 +3,36 @@
 Plugin Name: CodewarsWP
 Description: Plugin to get codewars profile
 */
-/* Start Adding Functions Below this Line */
-
-
 
 class cw_widget extends WP_Widget {
 
 
 	function __construct() {
 		parent::__construct(
-			'cw_widget', 
-			__('CodewarsWP', 'cw_widget_domain'), 
-			array( 'description' => __( 'Simple widget to show you your CodeWars Profile', 'cw_widget_domain' ), ) 
+			'cw_widget',
+			__('CodewarsWP', 'cw_widget_domain'),
+			array( 'description' => __( 'Simple widget to show you your CodeWars Profile', 'cw_widget_domain' ), )
 		);
+		wp_register_style( 'devicon', 'https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css' );
+		wp_enqueue_style( 'devicon');
 		wp_register_style( 'namespace',  plugins_url('css/style.css',__FILE__ ) );
 	}
-	
+
 	// Get user profile from Codewars REST API
 	function codewars_get_profile($user) {
 
 		$response = wp_remote_get( 'https://www.codewars.com/api/v1/users/'.$user );
 		if( is_array($response) ) {
-			$body = $response['body']; 
+			$body = $response['body'];
 		}
-	
+
 		return json_decode($body, true);
 
 	}
 
 	// Display the profile in front
 	function codewars_display_profile($user_data) {
-		
+
 		$value = $user_data['ranks']['overall'];
 		?>
 		<div class = "cw-profile">
@@ -49,7 +48,9 @@ class cw_widget extends WP_Widget {
 				<h3 class = "cw-header"><?php echo __( 'Rangi', 'cw_widget_domain' );?>:</h3>
 
 			<?php foreach($user_data['ranks']['languages'] as $key => $value) { ?>
-				<span class = "cw-language"><?php echo $key?></span> - <span style = "color: <?php echo $value['color'];?>;"><?php echo $value['name'];?> (<?php echo $value['score'];?> pts)</span><br>
+				<div class="cw-langscore" style = "color: <?php echo $value['color'];?>;">
+					<span class = "cw-language"> <i class="devicon-<?php echo ($key=='cpp'?'cplusplus':$key) ?>-plain"></i></span><span><?php echo $value['name'];?> (<?php echo $value['score'];?> pts)</span>
+				</div>
 			<?php } ?>
 			</div>
 
@@ -85,7 +86,7 @@ class cw_widget extends WP_Widget {
 		}
 		echo $args['after_widget'];
 	}
-		
+
 	// Backend form to set title and user
 	public function form( $instance ) {
 		if ( isset( $instance[ 'title' ] ) ) {
@@ -104,23 +105,23 @@ class cw_widget extends WP_Widget {
 
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'user' ); ?>"><?php _e( 'User:' ); ?></label> 
+			<label for="<?php echo $this->get_field_id( 'user' ); ?>"><?php _e( 'User:' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'user' ); ?>" name="<?php echo $this->get_field_name( 'user' ); ?>" type="text" value="<?php echo esc_attr( $user ); ?>" />
 		</p>
-		<?php 
+		<?php
 	}
-	
+
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
 		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
 		$instance['user'] = ( ! empty( $new_instance['user'] ) ) ? strip_tags( $new_instance['user'] ) : '';
 		return $instance;
 	}
-} 
+}
 
 function cw_load_widget() {
 		register_widget( 'cw_widget' );

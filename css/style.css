@@ -1,8 +1,11 @@
 .cw-profile {
-	background: #4B4D51;
+	background: #303133;
 	color: #efefef;
 	padding: 15px;
-	border-radius: 10px;
+	border: 10px solid #222222;
+	border-bottom: 0;
+	border-top: 0;
+	box-sizing: border-box;
 }
 
 .cw-basic-userdata {
@@ -16,7 +19,18 @@
 .cw-small-header {
 	font-weight: bold;
 }
+.cw-langscore {
+	height: 35px;
+	line-height: 35px;
+}
+
+.cw-langscore span {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: normal;
+}
 
 .cw-language {
-	font-style: oblique;
+	font-size: 30px;
+	margin-right: 10px;
 }
