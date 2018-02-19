@@ -39,13 +39,13 @@ class cw_widget extends WP_Widget {
 			<div class = "cw-basic-userdata">
 				<h2 class = "cw-header"><a href="https://www.codewars.com/users/<?php echo $user_data['username'];?>" target="_blank"><?php echo $user_data['username'];?></a></h2>
 				<p>
-					<span class = "cw-small-header"><img src = "https://www.codewars.com/users/<?php echo $user_data['username'];?>/badges/micro" title = "Profile badge small" alt = "small profile badge"> <br>
-					<span class = "cw-small-header"><?php echo __( 'Klan', 'cw_widget_domain' );?></span>: <?php echo $user_data['clan'];?> <br>
-					<span class = "cw-small-header"><?php echo __( 'Pozycja w rankingu', 'cw_widget_domain' );?></span>: <?php echo $user_data['leaderboardPosition'];?>
+					<span class = "cw-small-header"><img src = "https://www.codewars.com/users/<?php echo $user_data['username'];?>/badges/micro" title = "Profile badge sm_all" alt = "small profile badge"> <br>
+					<span class = "cw-small-header"><?php echo _e( 'Clan', 'cw_widget_domain' );?></span>: <?php echo $user_data['clan'];?> <br>
+					<span class = "cw-small-header"><?php echo _e( 'Leaderboard position', 'cw_widget_domain' );?></span>: <?php echo $user_data['leaderboardPosition'];?>
 				</p>
 			</div>
 			<div class = "cw-rank">
-				<h3 class = "cw-header"><?php echo __( 'Rangi', 'cw_widget_domain' );?>:</h3>
+				<h3 class = "cw-header"><?php echo _e( 'Ranks', 'cw_widget_domain' );?>:</h3>
 
 			<?php foreach($user_data['ranks']['languages'] as $key => $value) { ?>
 				<div class="cw-langscore" style = "color: <?php echo $value['color'];?>;">
@@ -55,9 +55,9 @@ class cw_widget extends WP_Widget {
 			</div>
 
 			<div class = "cw-challenges">
-				<h3 class = "cw-header"><?php echo __( 'Wyzwania', 'cw_widget_domain' );?>:</h3>
-				<span class = "cw-small-header"><?php echo __( 'Stworzone', 'cw_widget_domain' );?></span>: <?php echo $user_data['codeChallenges']['totalAuthored'];?><br>
-				<span class = "cw-small-header"><?php echo __( 'Ukończone', 'cw_widget_domain' );?></span>: <?php echo $user_data['codeChallenges']['totalCompleted'];?><br>
+				<h3 class = "cw-header"><?php echo _e( 'Challenges', 'cw_widget_domain' );?>:</h3>
+				<span class = "cw-small-header"><?php echo __( 'Authored', 'cw_widget_domain' );?></span>: <?php echo $user_data['codeChallenges']['totalAuthored'];?><br>
+				<span class = "cw-small-header"><?php echo __( 'Completed', 'cw_widget_domain' );?></span>: <?php echo $user_data['codeChallenges']['totalCompleted'];?><br>
 			</div>
 		</div>
 		<?php
