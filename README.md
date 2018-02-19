@@ -3,3 +3,7 @@ Simple WordPress plugin with widget to display Codewars profile. Uses [Devicon b
 
 ## Installation
 Download ZIP file and upload it as Wordpress Plugin.
+
+## Screenshots
+![Dashboard view](/../screenshots/screenshots/dashboard.png?raw=true)
+![Front view](/../screenshots/screenshots/frontend.png?raw=true)
